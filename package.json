@@ -1,0 +1,82 @@
+{
+  "name": "react-virtualized-transfer",
+  "version": "0.0.0",
+  "description": "react-virtualized-transfer",
+  "main": "lib/index.js",
+  "scripts": {
+    "lint": "eslint src/*.js src/test/*.js",
+    "test": "jest",
+    "coverage": "jest --coverage ",
+    "prepublish": "npm run lint && npm run build",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "build": "npm run build:commonjs && npm run build:css && npm run build:es && npm run build:demo && npm run build:umd",
+    "build:commonjs": "npm run clean:commonjs && cross-env NODE_ENV=production cross-env BABEL_ENV=commonjs babel source --out-dir dist/commonjs --ignore *.example.js,*.test.js,source/demo/,source/tests.js",
+    "build:css": "postcss --use autoprefixer source/styles.css > styles.css",
+    "clean": "npm run clean:commonjs && npm run clean:demo && npm run clean:es && npm run clean:umd",
+    "deploy": "gh-pages -d build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wangtao0101/react-virtualized-transfer.git"
+  },
+  "keywords": [
+    "react",
+    "virtualized",
+    "transfer"
+  ],
+  "author": "wangtao0101",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wangtao0101/react-virtualized-transfer/issues"
+  },
+  "homepage": "https://github.com/wangtao0101/react-virtualized-transfer#readme",
+  "dependencies": {
+    "antd": "^2.9.3",
+    "classnames": "^2.2.5",
+    "immutable": "^3.8.1",
+    "invariant": "^2.2.2",
+    "lodash": "^4.17.4",
+    "postcss": "^5.2.17",
+    "postcss-cli": "^3.2.0",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-virtualized": "^9.7.3",
+    "redux-immutable": "^4.0.0",
+    "warning": "^3.0.0"
+  },
+  "devDependencies": {
+    "@kadira/storybook": "^2.21.0",
+    "@types/jest": "^19.2.2",
+    "autoprefixer": "6.7.2",
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.0",
+    "babel-eslint": "^7.2.1",
+    "babel-jest": "^19.0.0",
+    "babel-loader": "^6.4.1",
+    "babel-plugin-import": "^1.1.1",
+    "babel-plugin-lodash": "^3.2.11",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-es2016": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.22.0",
+    "cross-env": "^4.0.0",
+    "css-loader": "^0.26.4",
+    "enzyme": "^2.8.2",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
+    "jest": "^19.0.2",
+    "less": "^2.7.1",
+    "less-loader": "^3.0.0",
+    "mock-socket": "^6.0.4",
+    "postcss-loader": "^1.3.3",
+    "redux": "^3.6.0",
+    "redux-saga": "^0.14.5",
+    "webpack": "^1.12.0"
+  }
+}

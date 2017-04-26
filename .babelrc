@@ -1,0 +1,33 @@
+{
+    "plugins": [
+        ["lodash"],
+        ["import",
+			[
+			  	{
+			    	"libraryName": "antd",
+			    	"libraryDirectory": "lib",
+			    	"style": true
+			  	}
+			]
+		],
+	],
+    "env": {
+        "production": {
+            "presets": [
+                "es2015",
+                "react",
+                "stage-0",
+            ],
+        },
+        "development": {
+            "sourceMaps" : "inline",
+            "presets": [
+                "es2016",
+                "react",
+            ],
+            "plugins": [
+                ["transform-es2015-modules-commonjs"],
+            ],
+        }
+    }
+}
