@@ -2,25 +2,62 @@
 @import "~antd/lib/style/mixins/index";
 @import "~antd/lib/checkbox/style/mixin";
 @prefix: transfer;
-
 .@{prefix} {
-    &-list{
-        list-style-type: none;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        padding: 7px 15px;
-        min-height: 32px;
-        transition: all .3s;
+    &-list {
+        font-size: @font-size-base;
+        border: @border-width-base @border-style-base @border-color-base;
+        display: inline-block;
+        border-radius: @border-radius-base;
+        vertical-align: middle;
+        position: relative;
+        outline: none;
 
-        &-item-disabled {
-            cursor: not-allowed;
-            color: @btn-disable-color;
+        div{
+            outline: none;
         }
 
-        &-item:not(&-item-disabled):hover {
-            cursor: pointer;
-            background-color: @primary-1;
+        &-search {
+            &-action {
+                color: @disabled-color;
+                position: absolute;
+                top: 4px;
+                right: 4px;
+                bottom: 4px;
+                width: 28px;
+                line-height: 26px;
+                text-align: center;
+                font-size: @font-size-lg;
+                .@{iconfont-css-prefix} {
+                    transition: all .3s;
+                    font-size: @font-size-base;
+                    color: @disabled-color;
+                    &:hover {
+                        color: @text-color-secondary;
+                    }
+                }
+                span& {
+                    pointer-events: none;
+                }
+            }
+        }
+        &-content {
+            &-item {
+                list-style-type: none;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                padding: 7px 15px;
+                min-height: 32px;
+                transition: all .3s;
+            }
+            &-item-disabled {
+                cursor: not-allowed;
+                color: @btn-disable-color;
+            }
+            &-item:not(&-item-disabled):hover {
+                cursor: pointer;
+                background-color: @primary-1;
+            }
         }
     }
 }

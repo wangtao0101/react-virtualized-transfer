@@ -12,10 +12,10 @@ export default class Transfer extends React.Component {
 
     render() {
         return (
-          <ul>
-            <Item />
-            <Item />
-          </ul>
+            <ul>
+                <Item />
+                <Item />
+            </ul>
         );
     }
 }

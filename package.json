@@ -10,11 +10,12 @@
     "prepublish": "npm run lint && npm run build",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "build": "npm run build:commonjs && npm run build:css && npm run build:es && npm run build:demo && npm run build:umd",
+    "buildxx": "npm run build:commonjs && npm run build:css && npm run build:es && npm run build:demo && npm run build:umd",
     "build:commonjs": "npm run clean:commonjs && cross-env NODE_ENV=production cross-env BABEL_ENV=commonjs babel source --out-dir dist/commonjs --ignore *.example.js,*.test.js,source/demo/,source/tests.js",
     "build:css": "postcss --use autoprefixer source/styles.css > styles.css",
     "clean": "npm run clean:commonjs && npm run clean:demo && npm run clean:es && npm run clean:umd",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "build": "cross-env NODE_ENV=production babel src -d lib --ignore test"
   },
   "repository": {
     "type": "git",
@@ -48,6 +49,7 @@
   "devDependencies": {
     "@kadira/storybook": "^2.21.0",
     "@types/jest": "^19.2.2",
+    "@types/react": "^15.0.23",
     "autoprefixer": "6.7.2",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.0",
