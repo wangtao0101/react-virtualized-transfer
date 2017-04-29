@@ -18,27 +18,28 @@ function isRenderResultPlainObject(result) {
         Object.prototype.toString.call(result) === '[object Object]';
 }
 
-function debounceEventHandler(...args) {
-    const debounced = _.debounce(...args);
-    return (e) => {
-        e.persist();
-        return debounced(e);
-    };
-}
-
 export default class SelectList extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
             filter: '',
+            dataSource: [],
         };
 
         this.renderItem = this.renderItem.bind(this);
         this.rowRenderer = this.rowRenderer.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
-        this.handleFilter = this.handleFilter.bind(this);
+        this.handleFilterWapper = this.handleFilterWapper.bind(this);
+        this.handleFilter = _.debounce(this.handleFilter.bind(this), 200);
         this.handleClear = this.handleClear.bind(this);
+        this.matchFilter = this.matchFilter.bind(this);
+    }
+
+    componentWillMount() {
+        this.setState({
+            dataSource: this.props.dataSource,
+        });
     }
 
     shouldComponentUpdate(...args) {
@@ -60,9 +61,34 @@ export default class SelectList extends React.Component {
         this.props.handleSelect(selectKey);
     }
 
-    handleFilter(e) {
+    handleFilterWapper(e) {
+        this.handleFilter(e.target.value);
         this.setState({
             filter: e.target.value,
+        });
+    }
+
+    matchFilter(filter, item) {
+        if (this.props.filterOption) {
+            return this.props.filterOption(filter, item);
+        }
+        const { renderedText } = this.renderItem(item);
+        return renderedText.indexOf(filter) >= 0;
+    }
+
+    handleFilter(filter) {
+        const showItems = [];
+        this.props.dataSource.map((item) => {
+            if (!this.matchFilter(filter, item)) {
+                return null;
+            }
+            showItems.push(item);
+            return item;
+        });
+        this.setState({
+            dataSource: showItems,
+        }, () => {
+            this.list.scrollToRow(0);
         });
     }
 
@@ -72,8 +98,8 @@ export default class SelectList extends React.Component {
         });
     }
 
-    rowRenderer({ _key, index, _isScrolling, _isVisible, parent, style }) {
-        const item = parent.props.list[index];
+    rowRenderer({ _key, index, _isScrolling, _isVisible, _parent, style }) {
+        const item = this.state.dataSource[index];
         const { renderedText, renderedEl } = this.renderItem(item);
         const checked = this.props.selectKey.indexOf(item.key) >= 0;
         const itemPrefixCls = `${prefixCls}-list`;
@@ -104,7 +130,8 @@ export default class SelectList extends React.Component {
     }
 
     render() {
-        const { dataSource, width, height } = this.props;
+        const { width, height } = this.props;
+        const { dataSource } = this.state;
 
         const className = classNames({
             [`${prefixCls}-list`]: true,
@@ -119,14 +146,14 @@ export default class SelectList extends React.Component {
             <div className={className} style={listStyle}>
                 <Search
                     value={this.state.filter}
-                    onChange={this.handleFilter}
-                    handleClear={debounceEventHandler(this.handleClear, 150)}
+                    onChange={this.handleFilterWapper}
+                    handleClear={this.handleClear}
                     prefixCls={`${prefixCls}-list-search`}
                 />
                 <List
                     ref={(list) => { this.list = list; }}
-                    width={width}
-                    height={height - 30}
+                    width={width - 2}
+                    height={height - 38}
                     rowCount={dataSource.length}
                     rowHeight={32}
                     rowRenderer={this.rowRenderer}
@@ -149,4 +176,5 @@ SelectList.propTypes = {
     handleSelect: PropTypes.func.isRequired,
     width: PropTypes.number,
     height: PropTypes.number,
+    filterOption: PropTypes.func,
 };

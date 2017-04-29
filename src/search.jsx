@@ -19,7 +19,6 @@ export default class Search extends React.Component {
 
     handleClear(e) {
         e.preventDefault();
-
         const handleClear = this.props.handleClear;
         if (handleClear) {
             handleClear(e);
@@ -37,7 +36,7 @@ export default class Search extends React.Component {
         );
 
         return (
-            <div>
+            <div className={`${prefixCls}-wapper`}>
                 <Input
                     placeholder={placeholder}
                     className={prefixCls}

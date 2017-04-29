@@ -16,9 +16,13 @@ export default class TestSelectList extends React.Component {
         });
     }
 
+    filterOption(inputValue, option) {
+        return option.description.indexOf(inputValue) > -1;
+    }
+
     render() {
         const dataSource = [];
-        for (let i = 0; i < 1000; i += 1) {
+        for (let i = 0; i < 2000; i += 1) {
             dataSource.push({
                 key: i.toString(),
                 title: `content${i + 1}`,

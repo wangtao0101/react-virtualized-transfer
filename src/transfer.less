@@ -16,7 +16,17 @@
             outline: none;
         }
 
+        li{
+            list-style-type: none;
+            list-style-position: outside;
+            list-style-image: none;
+        }
+
         &-search {
+            &-wapper {
+                padding: 4px;
+            }
+
             &-action {
                 color: @disabled-color;
                 position: absolute;
@@ -42,7 +52,6 @@
         }
         &-content {
             &-item {
-                list-style-type: none;
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;
