@@ -11,22 +11,18 @@
         vertical-align: middle;
         position: relative;
         outline: none;
-
-        div{
+        div {
             outline: none;
         }
-
-        li{
+        li {
             list-style-type: none;
             list-style-position: outside;
             list-style-image: none;
         }
-
         &-search {
             &-wapper {
                 padding: 4px;
             }
-
             &-action {
                 color: @disabled-color;
                 position: absolute;
@@ -67,6 +63,14 @@
                 cursor: pointer;
                 background-color: @primary-1;
             }
+        }
+        &-footer {
+            border-top: @border-width-base @border-style-base @border-color-split;
+            border-radius: 0 0 @border-radius-base @border-radius-base;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
         }
     }
 }

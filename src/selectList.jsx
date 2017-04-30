@@ -31,7 +31,8 @@ export default class SelectList extends React.Component {
         this.rowRenderer = this.rowRenderer.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
         this.handleFilterWapper = this.handleFilterWapper.bind(this);
-        this.handleFilter = _.debounce(this.handleFilter.bind(this), 200);
+        this.handleFilterWithDebounce = _.debounce(this.handleFilter.bind(this), 200);
+        this.handleFilter = this.handleFilter.bind(this);
         this.handleClear = this.handleClear.bind(this);
         this.matchFilter = this.matchFilter.bind(this);
     }
@@ -42,12 +43,28 @@ export default class SelectList extends React.Component {
         });
     }
 
-    shouldComponentUpdate(...args) {
-        if (PureRenderMixin.shouldComponentUpdate.apply(this, args)) {
-            this.list.forceUpdateGrid();
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.dataSource !== this.props.dataSource
+            || nextProps.dataSource.length !== this.props.dataSource) {
+            if (this.state.filter !== '') {
+                this.handleFilter(nextProps.dataSource, this.state.filter);
+            } else {
+                this.setState({
+                    dataSource: nextProps.dataSource,
+                });
+            }
+        }
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if (PureRenderMixin.shouldComponentUpdate.apply(this, nextProps, nextState)) {
             return true;
         }
         return false;
+    }
+
+    componentDidUpdate() {
+        this.list.forceUpdateGrid();
     }
 
     handleSelect(selectedItem) {
@@ -62,7 +79,7 @@ export default class SelectList extends React.Component {
     }
 
     handleFilterWapper(e) {
-        this.handleFilter(e.target.value);
+        this.handleFilterWithDebounce(this.props.dataSource, e.target.value);
         this.setState({
             filter: e.target.value,
         });
@@ -76,9 +93,9 @@ export default class SelectList extends React.Component {
         return renderedText.indexOf(filter) >= 0;
     }
 
-    handleFilter(filter) {
+    handleFilter(dataSource, filter) {
         const showItems = [];
-        this.props.dataSource.map((item) => {
+        dataSource.map((item) => {
             if (!this.matchFilter(filter, item)) {
                 return null;
             }
@@ -88,6 +105,7 @@ export default class SelectList extends React.Component {
         this.setState({
             dataSource: showItems,
         }, () => {
+            /* TODO: maybe we can scroll to the position which user is looking at*/
             this.list.scrollToRow(0);
         });
     }
@@ -95,6 +113,9 @@ export default class SelectList extends React.Component {
     handleClear() {
         this.setState({
             filter: '',
+            dataSource: this.props.dataSource,
+        }, () => {
+            this.list.scrollToRow(0);
         });
     }
 
@@ -130,7 +151,7 @@ export default class SelectList extends React.Component {
     }
 
     render() {
-        const { width, height } = this.props;
+        const { width, height, footer } = this.props;
         const { dataSource } = this.state;
 
         const className = classNames({
@@ -141,6 +162,14 @@ export default class SelectList extends React.Component {
             width,
             height,
         };
+
+        const footerDom = footer(Object.assign({}, this.props));
+
+        const listFooter = footerDom ? (
+            <div className={`${prefixCls}-list-footer`}>
+                {footerDom}
+            </div>
+        ) : null;
 
         return (
             <div className={className} style={listStyle}>
@@ -153,12 +182,12 @@ export default class SelectList extends React.Component {
                 <List
                     ref={(list) => { this.list = list; }}
                     width={width - 2}
-                    height={height - 38}
+                    height={height - 38 - 32}
                     rowCount={dataSource.length}
                     rowHeight={32}
                     rowRenderer={this.rowRenderer}
-                    list={dataSource}
                 />
+                {listFooter}
             </div>
         );
     }
@@ -166,7 +195,9 @@ export default class SelectList extends React.Component {
 
 SelectList.defaultProps = {
     width: 200,
-    height: 200,
+    height: 300,
+    filterOption: undefined,
+    footer: noop,
 };
 
 SelectList.propTypes = {
@@ -177,4 +208,5 @@ SelectList.propTypes = {
     width: PropTypes.number,
     height: PropTypes.number,
     filterOption: PropTypes.func,
+    footer: PropTypes.func,
 };
