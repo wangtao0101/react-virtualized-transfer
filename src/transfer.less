@@ -19,9 +19,23 @@
             list-style-position: outside;
             list-style-image: none;
         }
+        &-header {
+            padding: 7px 15px;
+            border-radius: @border-radius-base @border-radius-base 0 0;
+            background: @component-background;
+            color: @text-color;
+            border-bottom: @border-width-base @border-style-base @border-color-split;
+            overflow: hidden;
+            width: 100%;
+            &-title {
+                position: absolute;
+                right: 15px;
+            }
+        }
         &-search {
             &-wapper {
                 padding: 4px;
+                position: relative;
             }
             &-action {
                 color: @disabled-color;

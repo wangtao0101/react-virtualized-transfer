@@ -3,6 +3,7 @@ import PureRenderMixin from 'rc-util/lib/PureRenderMixin';
 import { List } from 'react-virtualized';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Checkbox } from 'antd';
 import _ from 'lodash';
 
 import 'antd/lib/form/style/index.less';
@@ -30,6 +31,7 @@ export default class SelectList extends React.Component {
         this.renderItem = this.renderItem.bind(this);
         this.rowRenderer = this.rowRenderer.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
+        this.handleSelectAll = this.handleSelectAll.bind(this);
         this.handleFilterWapper = this.handleFilterWapper.bind(this);
         this.handleFilterWithDebounce = _.debounce(this.handleFilter.bind(this), 200);
         this.handleFilter = this.handleFilter.bind(this);
@@ -67,15 +69,51 @@ export default class SelectList extends React.Component {
         this.list.forceUpdateGrid();
     }
 
-    handleSelect(selectedItem) {
-        const { selectKey } = this.props;
-        const index = selectKey.indexOf(selectedItem.key);
-        if (index > -1) {
-            selectKey.splice(index, 1);
-        } else {
-            selectKey.push(selectedItem.key);
+    getCheckStatus() {
+        const { selectKeys } = this.props;
+        const { dataSource } = this.state;
+        if (selectKeys.length === 0) {
+            return 'none';
+        } else if (dataSource.every(item => item.disabled || selectKeys.indexOf(item.key) >= 0)) {
+            return 'all';
         }
-        this.props.handleSelect(selectKey);
+        return 'part';
+    }
+
+    handleSelect(selectedItem) {
+        const { selectKeys } = this.props;
+        const hoder = [...selectKeys];
+        const index = hoder.indexOf(selectedItem.key);
+        if (index > -1) {
+            hoder.splice(index, 1);
+        } else {
+            hoder.push(selectedItem.key);
+        }
+        this.props.handleSelect(hoder);
+    }
+
+    handleSelectAll(checkAll) {
+        const { dataSource } = this.state;
+        const { selectKeys } = this.props;
+        const hoder = [...selectKeys];
+        let index;
+        if (!checkAll) {
+            dataSource.map((item) => {
+                if (!item.disabled && hoder.indexOf(item.key) < 0) {
+                    hoder.push(item.key);
+                }
+                return item;
+            });
+        } else {
+            dataSource.map((item) => {
+                index = hoder.indexOf(item.key);
+                if (index > -1) {
+                    hoder.splice(index, 1);
+                }
+                return item;
+            });
+        }
+        this.props.handleSelect(hoder);
     }
 
     handleFilterWapper(e) {
@@ -122,7 +160,7 @@ export default class SelectList extends React.Component {
     rowRenderer({ _key, index, _isScrolling, _isVisible, _parent, style }) {
         const item = this.state.dataSource[index];
         const { renderedText, renderedEl } = this.renderItem(item);
-        const checked = this.props.selectKey.indexOf(item.key) >= 0;
+        const checked = this.props.selectKeys.indexOf(item.key) >= 0;
         const itemPrefixCls = `${prefixCls}-list`;
 
         return (
@@ -151,17 +189,13 @@ export default class SelectList extends React.Component {
     }
 
     render() {
-        const { width, height, footer } = this.props;
+        const { width, height, footer, showSearch, showHeader, selectKeys,
+                itemUnit, itemsUnit, titleText } = this.props;
         const { dataSource } = this.state;
 
         const className = classNames({
             [`${prefixCls}-list`]: true,
         });
-
-        const listStyle = {
-            width,
-            height,
-        };
 
         const footerDom = footer(Object.assign({}, this.props));
 
@@ -171,8 +205,44 @@ export default class SelectList extends React.Component {
             </div>
         ) : null;
 
+        const checkStatus = this.getCheckStatus();
+        const checkedAll = checkStatus === 'all';
+        const checkAllCheckbox = (
+            <Checkbox
+                checked={checkedAll}
+                indeterminate={checkStatus === 'part'}
+                onChange={() => this.handleSelectAll(checkedAll)}
+            />
+        );
+        const unit = dataSource.length > 1 ? itemsUnit : itemUnit;
+
+        const listStyle = {
+            width,
+            height,
+        };
+
+        let bodyHeight = height;
+        bodyHeight = showHeader ? bodyHeight - 33 : bodyHeight;
+        bodyHeight = showSearch ? bodyHeight - 38 : bodyHeight;
+        bodyHeight = listFooter !== null ? bodyHeight - 32 : bodyHeight;
+
+        const header = showHeader ? (
+            <div className={`${prefixCls}-list-header`}>
+                {checkAllCheckbox}
+                <span className={`${prefixCls}-list-header-selected`}>
+                    <span>
+                        {(selectKeys.length > 0 ? `${selectKeys.length}/` : '') + dataSource.length} {unit}
+                    </span>
+                    <span className={`${prefixCls}-list-header-title`}>
+                        {titleText}
+                    </span>
+                </span>
+            </div>
+        ) : null;
+
         return (
             <div className={className} style={listStyle}>
+                {header}
                 <Search
                     value={this.state.filter}
                     onChange={this.handleFilterWapper}
@@ -182,7 +252,7 @@ export default class SelectList extends React.Component {
                 <List
                     ref={(list) => { this.list = list; }}
                     width={width - 2}
-                    height={height - 38 - 32}
+                    height={bodyHeight}
                     rowCount={dataSource.length}
                     rowHeight={32}
                     rowRenderer={this.rowRenderer}
@@ -198,15 +268,25 @@ SelectList.defaultProps = {
     height: 300,
     filterOption: undefined,
     footer: noop,
+    showSearch: false,
+    showHeader: true,
+    itemUnit: '',
+    itemsUnit: '',
+    titleText: '',
 };
 
 SelectList.propTypes = {
     render: PropTypes.func.isRequired,
     dataSource: PropTypes.array.isRequired,
-    selectKey: PropTypes.array.isRequired,
+    selectKeys: PropTypes.array.isRequired,
     handleSelect: PropTypes.func.isRequired,
     width: PropTypes.number,
     height: PropTypes.number,
     filterOption: PropTypes.func,
     footer: PropTypes.func,
+    showSearch: PropTypes.bool,
+    showHeader: PropTypes.bool,
+    itemUnit: PropTypes.string,
+    itemsUnit: PropTypes.string,
+    titleText: PropTypes.string,
 };
