@@ -30,6 +30,7 @@ export default class Transfer extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        /* TODO: should improve currently 10000/43.44ms*/
         if (nextProps.dataSource !== this.props.dataSource ||
             nextProps.targetKeys !== this.props.targetKeys ||
             nextProps.selectedKeys !== this.props.selectedKeys) {
