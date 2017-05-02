@@ -6,7 +6,7 @@ export default class TestSelectList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectKeys: [],
+            selectedKeys: [],
             dataSource: [],
         };
         this.handleSelect = this.handleSelect.bind(this);
@@ -31,7 +31,7 @@ export default class TestSelectList extends React.Component {
         }
         this.setState({
             dataSource,
-            selectKeys: [],
+            selectedKeys: [],
         });
     }
 
@@ -39,9 +39,9 @@ export default class TestSelectList extends React.Component {
         return option.description.indexOf(inputValue) > -1;
     }
 
-    handleSelect(selectKeys) {
+    handleSelect(selectedKeys) {
         this.setState({
-            selectKeys,
+            selectedKeys,
         });
     }
 
@@ -62,7 +62,7 @@ export default class TestSelectList extends React.Component {
             <SelectList
                 render={item => item.title}
                 dataSource={this.state.dataSource}
-                selectKeys={this.state.selectKeys}
+                selectedKeys={this.state.selectedKeys}
                 handleSelect={this.handleSelect}
                 footer={this.renderFooter}
                 showSearch

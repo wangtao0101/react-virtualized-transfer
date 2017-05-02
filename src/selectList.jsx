@@ -46,8 +46,7 @@ export default class SelectList extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.dataSource !== this.props.dataSource
-            || nextProps.dataSource.length !== this.props.dataSource) {
+        if (nextProps.dataSource !== this.props.dataSource) {
             if (this.state.filter !== '') {
                 this.handleFilter(nextProps.dataSource, this.state.filter);
             } else {
@@ -70,19 +69,19 @@ export default class SelectList extends React.Component {
     }
 
     getCheckStatus() {
-        const { selectKeys } = this.props;
+        const { selectedKeys } = this.props;
         const { dataSource } = this.state;
-        if (selectKeys.length === 0) {
+        if (selectedKeys.length === 0) {
             return 'none';
-        } else if (dataSource.every(item => item.disabled || selectKeys.indexOf(item.key) >= 0)) {
+        } else if (dataSource.every(item => item.disabled || selectedKeys.indexOf(item.key) >= 0)) {
             return 'all';
         }
         return 'part';
     }
 
     handleSelect(selectedItem) {
-        const { selectKeys } = this.props;
-        const hoder = [...selectKeys];
+        const { selectedKeys } = this.props;
+        const hoder = [...selectedKeys];
         const index = hoder.indexOf(selectedItem.key);
         if (index > -1) {
             hoder.splice(index, 1);
@@ -94,8 +93,8 @@ export default class SelectList extends React.Component {
 
     handleSelectAll(checkAll) {
         const { dataSource } = this.state;
-        const { selectKeys } = this.props;
-        const hoder = [...selectKeys];
+        const { selectedKeys } = this.props;
+        const hoder = [...selectedKeys];
         let index;
         if (!checkAll) {
             dataSource.map((item) => {
@@ -160,7 +159,7 @@ export default class SelectList extends React.Component {
     rowRenderer({ _key, index, _isScrolling, _isVisible, _parent, style }) {
         const item = this.state.dataSource[index];
         const { renderedText, renderedEl } = this.renderItem(item);
-        const checked = this.props.selectKeys.indexOf(item.key) >= 0;
+        const checked = this.props.selectedKeys.indexOf(item.key) >= 0;
         const itemPrefixCls = `${prefixCls}-list`;
 
         return (
@@ -189,7 +188,7 @@ export default class SelectList extends React.Component {
     }
 
     render() {
-        const { width, height, footer, showSearch, showHeader, selectKeys,
+        const { width, height, footer, showSearch, showHeader, selectedKeys,
                 itemUnit, itemsUnit, titleText } = this.props;
         const { dataSource } = this.state;
 
@@ -231,7 +230,7 @@ export default class SelectList extends React.Component {
                 {checkAllCheckbox}
                 <span className={`${prefixCls}-list-header-selected`}>
                     <span>
-                        {(selectKeys.length > 0 ? `${selectKeys.length}/` : '') + dataSource.length} {unit}
+                        {(selectedKeys.length > 0 ? `${selectedKeys.length}/` : '') + dataSource.length} {unit}
                     </span>
                     <span className={`${prefixCls}-list-header-title`}>
                         {titleText}
@@ -278,7 +277,7 @@ SelectList.defaultProps = {
 SelectList.propTypes = {
     render: PropTypes.func.isRequired,
     dataSource: PropTypes.array.isRequired,
-    selectKeys: PropTypes.array.isRequired,
+    selectedKeys: PropTypes.array.isRequired,
     handleSelect: PropTypes.func.isRequired,
     width: PropTypes.number,
     height: PropTypes.number,
