@@ -18,16 +18,11 @@ export default class Transfer extends React.Component {
         };
 
         this.handleSelect = this.handleSelect.bind(this);
+        this.initStateByProps = this.initStateByProps.bind(this);
     }
 
     componentWillMount() {
-        const { dataSource, targetKeys, selectedKeys } = this.props;
-        this.setState({
-            leftSource: dataSource.filter(item => !targetKeys.includes(item.key)),
-            rightSrouce: dataSource.filter(item => targetKeys.includes(item.key)),
-            sourceSelectedKeys: selectedKeys.filter(key => !targetKeys.includes(key)),
-            targetSelectedKeys: selectedKeys.filter(key => targetKeys.includes(key)),
-        });
+        this.initStateByProps(this.props);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -35,21 +30,44 @@ export default class Transfer extends React.Component {
         if (nextProps.dataSource !== this.props.dataSource ||
             nextProps.targetKeys !== this.props.targetKeys ||
             nextProps.selectedKeys !== this.props.selectedKeys) {
-            this.setState({
-                leftSource: nextProps.dataSource
-                    .filter(item => !nextProps.targetKeys.includes(item.key)),
-                rightSrouce: nextProps.dataSource
-                    .filter(item => nextProps.targetKeys.includes(item.key)),
-                sourceSelectedKeys: nextProps.selectedKeys
-                    .filter(key => !nextProps.targetKeys.includes(key)),
-                targetSelectedKeys: nextProps.selectedKeys
-                    .filter(key => nextProps.targetKeys.includes(key)),
-            });
+            this.initStateByProps(nextProps);
         }
     }
 
     shouldComponentUpdate(...args) {
         return PureRenderMixin.shouldComponentUpdate.apply(this, args);
+    }
+
+    initStateByProps(props) {
+        const leftSource = [];
+        const rightSrouce = [];
+        const sourceSelectedKeys = [];
+        const targetSelectedKeys = [];
+
+        props.dataSource.map((item) => {
+            if (props.targetKeys.includes(item.key)) {
+                rightSrouce.push(item);
+            } else {
+                leftSource.push(item);
+            }
+            return item;
+        });
+
+        props.selectedKeys.map((key) => {
+            if (props.targetKeys.includes(key)) {
+                targetSelectedKeys.push(key);
+            } else {
+                sourceSelectedKeys.push(key);
+            }
+            return key;
+        });
+
+        this.setState({
+            leftSource,
+            rightSrouce,
+            sourceSelectedKeys,
+            targetSelectedKeys,
+        });
     }
 
     handleSelect(direction, selectedKeys) {
