@@ -21,7 +21,7 @@ export default class TestTransferList extends React.Component {
     getMock() {
         const dataSource = [];
         const targetKeys = [];
-        const length = Math.random() * 10000;
+        const length = 5000;
         for (let i = 0; i < (length < 1 ? 10 : length); i += 1) {
             const data = {
                 key: i.toString(),

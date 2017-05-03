@@ -8,6 +8,6 @@ storiesOf('Transfer', module)
     .add('SelectList', () => (
         <TestSelectList />
     ))
-    .add('SelectList', () => (
+    .add('transfer', () => (
         <TestTransfer />
     ));

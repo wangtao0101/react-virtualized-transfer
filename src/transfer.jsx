@@ -2,6 +2,7 @@ import 'react-virtualized/styles.css';
 import React from 'react';
 import PureRenderMixin from 'rc-util/lib/PureRenderMixin';
 import PropTypes from 'prop-types';
+import 'core-js/fn/array/includes';
 import './transfer.less';
 import SelectList from './selectList';
 
