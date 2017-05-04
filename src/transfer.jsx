@@ -22,6 +22,9 @@ export default class Transfer extends React.Component {
 
         this.handleSelect = this.handleSelect.bind(this);
         this.initStateByProps = this.initStateByProps.bind(this);
+        this.moveTo = this.moveTo.bind(this);
+        this.moveToLeft = this.moveToLeft.bind(this);
+        this.moveToRight = this.moveToRight.bind(this);
     }
 
     componentWillMount() {
@@ -40,11 +43,17 @@ export default class Transfer extends React.Component {
         return PureRenderMixin.shouldComponentUpdate.apply(this, args);
     }
 
+    getSelectedKeysName(direction) {
+        return direction === 'left' ? 'sourceSelectedKeys' : 'targetSelectedKeys';
+    }
+
     initStateByProps(props, update) {
         const leftSource = [];
         const rightSrouce = [];
         const sourceSelectedKeys = [];
         const targetSelectedKeys = [];
+        const oldSourceSelectedKeys = this.state.sourceSelectedKeys;
+        const oldTargetSelectedKeys = this.state.targetSelectedKeys;
 
         props.dataSource.forEach((item) => {
             if (props.targetKeys.includes(item.key)) {
@@ -52,24 +61,8 @@ export default class Transfer extends React.Component {
             } else {
                 leftSource.push(item);
             }
-        });
 
-        if (props.selectedKeys) {
-            props.selectedKeys.map((key) => {
-                if (props.targetKeys.includes(key)) {
-                    targetSelectedKeys.push(key);
-                } else {
-                    sourceSelectedKeys.push(key);
-                }
-                return key;
-            });
-        }
-
-        if (!props.selectedKeys && update) {
-            // filter selectedKeys in state
-            const oldSourceSelectedKeys = this.state.sourceSelectedKeys;
-            const oldTargetSelectedKeys = this.state.targetSelectedKeys;
-            props.dataSource.forEach((item) => {
+            if (!props.selectedKeys && update) {
                 if (oldSourceSelectedKeys.includes(item.key) &&
                     !props.targetKeys.includes(item.key)) {
                     sourceSelectedKeys.push(item.key);
@@ -77,6 +70,16 @@ export default class Transfer extends React.Component {
                 if (oldTargetSelectedKeys.includes(item.key) &&
                     props.targetKeys.includes(item.key)) {
                     targetSelectedKeys.push(item.key);
+                }
+            }
+        });
+
+        if (props.selectedKeys) {
+            props.selectedKeys.forEach((key) => {
+                if (props.targetKeys.includes(key)) {
+                    targetSelectedKeys.push(key);
+                } else {
+                    sourceSelectedKeys.push(key);
                 }
             });
         }
@@ -104,7 +107,42 @@ export default class Transfer extends React.Component {
         this.props.onSelectChange(this.state.sourceSelectedKeys, selectedKeys);
     }
 
+    moveTo(direction) {
+        const { targetKeys = [], dataSource = [], onChange } = this.props;
+        const { sourceSelectedKeys, targetSelectedKeys } = this.state;
+        const moveKeys = direction === 'right' ? sourceSelectedKeys : targetSelectedKeys;
+        // filter the disabled options
+        // const newMoveKeys = moveKeys.filter(
+        //     key => !dataSource.some(data => !!(key === data.key && data.disabled))
+        // );
+        const newMoveKeys = [];
+        dataSource.forEach((item) => {
+            if (!item.disabled && moveKeys.includes(item.key)) {
+                newMoveKeys.push(item.key);
+            }
+        });
+        // move items to target box
+        const newTargetKeys = direction === 'right'
+            ? newMoveKeys.concat(targetKeys)
+            : targetKeys.filter(targetKey => newMoveKeys.indexOf(targetKey) === -1);
+        // empty checked keys
+        const oppositeDirection = direction === 'right' ? 'left' : 'right';
+        this.setState({
+            [this.getSelectedKeysName(oppositeDirection)]: [],
+        });
+        this.handleSelect(oppositeDirection, []);
+        if (onChange) {
+            onChange(newTargetKeys, direction, newMoveKeys);
+        }
+    }
+
+    moveToLeft() { this.moveTo('left'); }
+    moveToRight() { this.moveTo('right'); }
+
     render() {
+        const { sourceSelectedKeys, targetSelectedKeys } = this.state;
+        const leftActive = targetSelectedKeys.length > 0;
+        const rightActive = sourceSelectedKeys.length > 0;
         return (
             <div>
                 <SelectList
@@ -118,7 +156,13 @@ export default class Transfer extends React.Component {
                     itemUnit={'item'}
                     titleText={'Source'}
                 />
-                <Operation className={`${prefixCls}-operation`} leftActive={false} rightActive={false} />
+                <Operation
+                    className={`${prefixCls}-operation`}
+                    leftActive={leftActive}
+                    rightActive={rightActive}
+                    moveToLeft={this.moveToLeft}
+                    moveToRight={this.moveToRight}
+                />
                 <SelectList
                     dataSource={this.state.rightSrouce}
                     render={this.props.render}
@@ -138,7 +182,7 @@ export default class Transfer extends React.Component {
 
 Transfer.defaultProps = {
     dataSource: [],
-    selectedKeys: [],
+    selectedKeys: undefined,
     onSelectChange: undefined,
 };
 
