@@ -57,11 +57,12 @@ export default class TestTransferList extends React.Component {
     render() {
         return (
             <Transfer
-                render={item => item.title}
+                render={item => `${item.title}-${item.description}`}
                 dataSource={this.state.dataSource}
                 targetKeys={this.state.targetKeys}
                 selectedKeys={this.state.selectedKeys}
                 onSelectChange={this.handleSelectChange}
+                filterOption={this.filterOption}
                 onChange={this.handleChange}
                 titles={['source', 'target']}
                 className={'test'}

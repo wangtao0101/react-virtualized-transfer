@@ -140,7 +140,7 @@ export default class Transfer extends React.Component {
 
     render() {
         const { sourceSelectedKeys, targetSelectedKeys } = this.state;
-        const { titles, className } = this.props;
+        const { titles, className, filterOption } = this.props;
         const leftActive = targetSelectedKeys.length > 0;
         const rightActive = sourceSelectedKeys.length > 0;
 
@@ -157,6 +157,7 @@ export default class Transfer extends React.Component {
                     handleSelect={selectedKeys => this.handleSelect('left', selectedKeys)}
                     showSearch
                     showHeader
+                    filterOption={filterOption}
                     itemsUnit={'items'}
                     itemUnit={'item'}
                     titleText={titles[0]}
@@ -175,6 +176,7 @@ export default class Transfer extends React.Component {
                     handleSelect={selectedKeys => this.handleSelect('right', selectedKeys)}
                     showSearch
                     showHeader
+                    filterOption={filterOption}
                     itemsUnit={'items'}
                     itemUnit={'item'}
                     titleText={titles[1]}
@@ -191,6 +193,7 @@ Transfer.defaultProps = {
     onSelectChange: undefined,
     titles: ['', ''],
     className: undefined,
+    filterOption: undefined,
 };
 
 Transfer.propTypes = {
@@ -202,4 +205,5 @@ Transfer.propTypes = {
     onSelectChange: PropTypes.func,
     titles: PropTypes.array,
     className: PropTypes.string,
+    filterOption: PropTypes.func,
 };
