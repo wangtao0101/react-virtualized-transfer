@@ -87,4 +87,19 @@
             width: 100%;
         }
     }
+    &-operation {
+        display: inline-block;
+        overflow: hidden;
+        margin: 0 8px;
+        vertical-align: middle;
+        .@{ant-prefix}-btn {
+            display: block;
+            &:first-child {
+                margin-bottom: 4px;
+            }
+            .@{iconfont-css-prefix} {
+                .iconfont-size-under-12px(10px);
+            }
+        }
+    }
 }
