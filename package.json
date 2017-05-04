@@ -14,7 +14,7 @@
     "build:commonjs": "npm run clean:commonjs && cross-env NODE_ENV=production cross-env BABEL_ENV=commonjs babel source --out-dir dist/commonjs --ignore *.example.js,*.test.js,source/demo/,source/tests.js",
     "build:css": "postcss --use autoprefixer source/styles.css > styles.css",
     "clean": "npm run clean:commonjs && npm run clean:demo && npm run clean:es && npm run clean:umd",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d storybook-static",
     "build": "cross-env NODE_ENV=production babel src -d lib --ignore test"
   },
   "repository": {
@@ -72,6 +72,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
+    "gh-pages": "^0.12.0",
     "jest": "^19.0.2",
     "less": "^2.7.1",
     "less-loader": "^3.0.0",
