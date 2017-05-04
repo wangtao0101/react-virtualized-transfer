@@ -60,9 +60,11 @@ export default class TestTransferList extends React.Component {
                 render={item => item.title}
                 dataSource={this.state.dataSource}
                 targetKeys={this.state.targetKeys}
-                // selectedKeys={this.state.selectedKeys}
-                // onSelectChange={this.handleSelectChange}
+                selectedKeys={this.state.selectedKeys}
+                onSelectChange={this.handleSelectChange}
                 onChange={this.handleChange}
+                titles={['source', 'target']}
+                className={'test'}
             />
         );
     }

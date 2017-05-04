@@ -2,6 +2,7 @@ import 'react-virtualized/styles.css';
 import React from 'react';
 import PureRenderMixin from 'rc-util/lib/PureRenderMixin';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import 'core-js/fn/array/includes';
 import './transfer.less';
 import SelectList from './selectList';
@@ -63,6 +64,7 @@ export default class Transfer extends React.Component {
             }
 
             if (!props.selectedKeys && update) {
+                // fitler not exist keys
                 if (oldSourceSelectedKeys.includes(item.key) &&
                     !props.targetKeys.includes(item.key)) {
                     sourceSelectedKeys.push(item.key);
@@ -103,19 +105,16 @@ export default class Transfer extends React.Component {
             });
             return;
         }
-        this.props.onSelectChange(selectedKeys, this.state.targetSelectedKeys);
-        this.props.onSelectChange(this.state.sourceSelectedKeys, selectedKeys);
+        this.props.onSelectChange(leftKeys, rightKeys);
     }
 
     moveTo(direction) {
         const { targetKeys = [], dataSource = [], onChange } = this.props;
         const { sourceSelectedKeys, targetSelectedKeys } = this.state;
         const moveKeys = direction === 'right' ? sourceSelectedKeys : targetSelectedKeys;
-        // filter the disabled options
-        // const newMoveKeys = moveKeys.filter(
-        //     key => !dataSource.some(data => !!(key === data.key && data.disabled))
-        // );
+
         const newMoveKeys = [];
+        // disable key can be selected in props, so there should fitler disabled keys
         dataSource.forEach((item) => {
             if (!item.disabled && moveKeys.includes(item.key)) {
                 newMoveKeys.push(item.key);
@@ -141,10 +140,16 @@ export default class Transfer extends React.Component {
 
     render() {
         const { sourceSelectedKeys, targetSelectedKeys } = this.state;
+        const { titles, className } = this.props;
         const leftActive = targetSelectedKeys.length > 0;
         const rightActive = sourceSelectedKeys.length > 0;
+
+        const cls = classNames({
+            [`${prefixCls}`]: true,
+        }, className);
+
         return (
-            <div>
+            <div className={cls}>
                 <SelectList
                     dataSource={this.state.leftSource}
                     render={this.props.render}
@@ -154,7 +159,7 @@ export default class Transfer extends React.Component {
                     showHeader
                     itemsUnit={'items'}
                     itemUnit={'item'}
-                    titleText={'Source'}
+                    titleText={titles[0]}
                 />
                 <Operation
                     className={`${prefixCls}-operation`}
@@ -172,7 +177,7 @@ export default class Transfer extends React.Component {
                     showHeader
                     itemsUnit={'items'}
                     itemUnit={'item'}
-                    titleText={'Target'}
+                    titleText={titles[1]}
                 />
             </div>
         );
@@ -184,6 +189,8 @@ Transfer.defaultProps = {
     dataSource: [],
     selectedKeys: undefined,
     onSelectChange: undefined,
+    titles: ['', ''],
+    className: undefined,
 };
 
 Transfer.propTypes = {
@@ -193,4 +200,6 @@ Transfer.propTypes = {
     dataSource: PropTypes.array,
     selectedKeys: PropTypes.array,
     onSelectChange: PropTypes.func,
+    titles: PropTypes.array,
+    className: PropTypes.string,
 };
