@@ -188,8 +188,8 @@ export default class SelectList extends React.Component {
     }
 
     render() {
-        const { width, height, footer, showSearch, showHeader, selectedKeys,
-                itemUnit, itemsUnit, titleText } = this.props;
+        const { footer, showSearch, showHeader, selectedKeys,
+                itemUnit, itemsUnit, titleText, style } = this.props;
         const { dataSource } = this.state;
 
         const className = classNames({
@@ -215,12 +215,7 @@ export default class SelectList extends React.Component {
         );
         const unit = dataSource.length > 1 ? itemsUnit : itemUnit;
 
-        const listStyle = {
-            width,
-            height,
-        };
-
-        let bodyHeight = height;
+        let bodyHeight = style.height;
         bodyHeight = showHeader ? bodyHeight - 33 : bodyHeight;
         bodyHeight = showSearch ? bodyHeight - 38 : bodyHeight;
         bodyHeight = listFooter !== null ? bodyHeight - 32 : bodyHeight;
@@ -240,7 +235,7 @@ export default class SelectList extends React.Component {
         ) : null;
 
         return (
-            <div className={className} style={listStyle}>
+            <div className={className} style={style}>
                 {header}
                 <Search
                     value={this.state.filter}
@@ -264,8 +259,6 @@ export default class SelectList extends React.Component {
 }
 
 SelectList.defaultProps = {
-    width: 200,
-    height: 300,
     filterOption: undefined,
     footer: noop,
     showSearch: false,
@@ -273,6 +266,10 @@ SelectList.defaultProps = {
     itemUnit: '',
     itemsUnit: '',
     titleText: '',
+    style: {
+        width: 200,
+        height: 300,
+    },
 };
 
 SelectList.propTypes = {
@@ -280,8 +277,6 @@ SelectList.propTypes = {
     dataSource: PropTypes.array.isRequired,
     selectedKeys: PropTypes.array.isRequired,
     handleSelect: PropTypes.func.isRequired,
-    width: PropTypes.number,
-    height: PropTypes.number,
     filterOption: PropTypes.func,
     footer: PropTypes.func,
     showSearch: PropTypes.bool,
@@ -290,4 +285,8 @@ SelectList.propTypes = {
     itemsUnit: PropTypes.string,
     titleText: PropTypes.string,
     rowHeight: PropTypes.number.isRequired,
+    style: PropTypes.shape({
+        height: PropTypes.number.isRequired, // not support %
+        width: PropTypes.any,
+    }),
 };

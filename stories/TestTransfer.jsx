@@ -67,6 +67,11 @@ export default class TestTransferList extends React.Component {
                 titles={['source', 'target']}
                 className={'test'}
                 rowHeight={32}
+                listStyle={{
+                    width: '40%',
+                    height: 400,
+                }}
+                operations={['to right', 'to left']}
             />
         );
     }

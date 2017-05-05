@@ -162,6 +162,7 @@ export default class Transfer extends React.Component {
                     itemUnit={'item'}
                     titleText={titles[0]}
                     rowHeight={this.props.rowHeight}
+                    style={this.props.listStyle}
                 />
                 <Operation
                     className={`${prefixCls}-operation`}
@@ -169,6 +170,8 @@ export default class Transfer extends React.Component {
                     rightActive={rightActive}
                     moveToLeft={this.moveToLeft}
                     moveToRight={this.moveToRight}
+                    leftArrowText={this.props.operations[0]}
+                    rightArrowText={this.props.operations[1]}
                 />
                 <SelectList
                     dataSource={this.state.rightSrouce}
@@ -182,6 +185,7 @@ export default class Transfer extends React.Component {
                     itemUnit={'item'}
                     titleText={titles[1]}
                     rowHeight={this.props.rowHeight}
+                    style={this.props.listStyle}
                 />
             </div>
         );
@@ -196,17 +200,27 @@ Transfer.defaultProps = {
     titles: ['', ''],
     className: undefined,
     filterOption: undefined,
+    listStyle: {
+        width: 200,
+        height: 300,
+    },
+    operations: ['', ''],
 };
 
 Transfer.propTypes = {
-    render: PropTypes.func.isRequired,
-    onChange: PropTypes.func.isRequired,
-    targetKeys: PropTypes.array.isRequired,
     dataSource: PropTypes.array,
+    render: PropTypes.func.isRequired,
+    targetKeys: PropTypes.array.isRequired,
     selectedKeys: PropTypes.array,
+    onChange: PropTypes.func.isRequired,
     onSelectChange: PropTypes.func,
     titles: PropTypes.array,
     className: PropTypes.string,
     filterOption: PropTypes.func,
     rowHeight: PropTypes.number.isRequired,
+    listStyle: PropTypes.shape({
+        height: PropTypes.number.isRequired, // not support %
+        width: PropTypes.any,
+    }),
+    operations: PropTypes.array,
 };
