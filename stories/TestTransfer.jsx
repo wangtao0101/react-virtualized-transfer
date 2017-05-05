@@ -66,6 +66,7 @@ export default class TestTransferList extends React.Component {
                 onChange={this.handleChange}
                 titles={['source', 'target']}
                 className={'test'}
+                rowHeight={32}
             />
         );
     }

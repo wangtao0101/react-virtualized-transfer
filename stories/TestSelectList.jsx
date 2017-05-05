@@ -20,7 +20,7 @@ export default class TestSelectList extends React.Component {
 
     getMock() {
         const dataSource = [];
-        const length = Math.random() * 1000;
+        const length = Math.random() * 10;
         for (let i = 0; i < (length < 1 ? 10 : length); i += 1) {
             dataSource.push({
                 key: i.toString(),
@@ -70,6 +70,7 @@ export default class TestSelectList extends React.Component {
                 itemsUnit={'items'}
                 itemUnit={'item'}
                 titleText={'Source'}
+                rowHeight={32}
             />
         );
     }

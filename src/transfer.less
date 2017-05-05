@@ -88,6 +88,15 @@
             left: 0;
             width: 100%;
         }
+
+        // fix the problem of ReactVirtualized List must hava width (number) props
+        &-virtualized {
+            width: 100% !important;
+        }
+        .ReactVirtualized__Grid__innerScrollContainer {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
     }
     &-operation {
         display: inline-block;
@@ -105,3 +114,4 @@
         }
     }
 }
+

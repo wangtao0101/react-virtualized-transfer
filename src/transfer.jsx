@@ -161,6 +161,7 @@ export default class Transfer extends React.Component {
                     itemsUnit={'items'}
                     itemUnit={'item'}
                     titleText={titles[0]}
+                    rowHeight={this.props.rowHeight}
                 />
                 <Operation
                     className={`${prefixCls}-operation`}
@@ -180,6 +181,7 @@ export default class Transfer extends React.Component {
                     itemsUnit={'items'}
                     itemUnit={'item'}
                     titleText={titles[1]}
+                    rowHeight={this.props.rowHeight}
                 />
             </div>
         );
@@ -206,4 +208,5 @@ Transfer.propTypes = {
     titles: PropTypes.array,
     className: PropTypes.string,
     filterOption: PropTypes.func,
+    rowHeight: PropTypes.number.isRequired,
 };

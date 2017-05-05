@@ -250,11 +250,12 @@ export default class SelectList extends React.Component {
                 />
                 <List
                     ref={(list) => { this.list = list; }}
-                    width={width - 2}
                     height={bodyHeight}
                     rowCount={dataSource.length}
-                    rowHeight={32}
+                    rowHeight={this.props.rowHeight}
                     rowRenderer={this.rowRenderer}
+                    width={1}
+                    className={`${prefixCls}-list-virtualized`}
                 />
                 {listFooter}
             </div>
@@ -288,4 +289,5 @@ SelectList.propTypes = {
     itemUnit: PropTypes.string,
     itemsUnit: PropTypes.string,
     titleText: PropTypes.string,
+    rowHeight: PropTypes.number.isRequired,
 };
