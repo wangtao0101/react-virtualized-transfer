@@ -189,7 +189,7 @@ export default class SelectList extends React.Component {
 
     render() {
         const { footer, showSearch, showHeader, selectedKeys,
-                itemUnit, itemsUnit, titleText, style } = this.props;
+            itemUnit, itemsUnit, titleText, style } = this.props;
         const { dataSource } = this.state;
 
         const className = classNames({
@@ -215,7 +215,8 @@ export default class SelectList extends React.Component {
         );
         const unit = dataSource.length > 1 ? itemsUnit : itemUnit;
 
-        let bodyHeight = style.height;
+        // height is not 100%, so there should minus 2px of the boder of transfer-list
+        let bodyHeight = style.height - 2;
         bodyHeight = showHeader ? bodyHeight - 33 : bodyHeight;
         bodyHeight = showSearch ? bodyHeight - 38 : bodyHeight;
         bodyHeight = listFooter !== null ? bodyHeight - 32 : bodyHeight;
@@ -234,15 +235,19 @@ export default class SelectList extends React.Component {
             </div>
         ) : null;
 
+        const search = showSearch ? (
+            <Search
+                value={this.state.filter}
+                onChange={this.handleFilterWapper}
+                handleClear={this.handleClear}
+                prefixCls={`${prefixCls}-list-search`}
+            />
+        ) : null;
+
         return (
             <div className={className} style={style}>
                 {header}
-                <Search
-                    value={this.state.filter}
-                    onChange={this.handleFilterWapper}
-                    handleClear={this.handleClear}
-                    prefixCls={`${prefixCls}-list-search`}
-                />
+                {search}
                 <List
                     ref={(list) => { this.list = list; }}
                     height={bodyHeight}

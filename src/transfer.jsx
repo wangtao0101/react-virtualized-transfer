@@ -10,6 +10,8 @@ import Operation from './operation';
 
 import prefixCls from './constants';
 
+function noop() { }
+
 export default class Transfer extends React.Component {
     constructor(props) {
         super(props);
@@ -140,7 +142,7 @@ export default class Transfer extends React.Component {
 
     render() {
         const { sourceSelectedKeys, targetSelectedKeys } = this.state;
-        const { titles, className, filterOption } = this.props;
+        const { titles, className, filterOption, showSearch, footer } = this.props;
         const leftActive = targetSelectedKeys.length > 0;
         const rightActive = sourceSelectedKeys.length > 0;
 
@@ -155,14 +157,14 @@ export default class Transfer extends React.Component {
                     render={this.props.render}
                     selectedKeys={this.state.sourceSelectedKeys}
                     handleSelect={selectedKeys => this.handleSelect('left', selectedKeys)}
-                    showSearch
-                    showHeader
+                    showSearch={showSearch}
                     filterOption={filterOption}
                     itemsUnit={'items'}
                     itemUnit={'item'}
                     titleText={titles[0]}
                     rowHeight={this.props.rowHeight}
                     style={this.props.listStyle}
+                    footer={footer}
                 />
                 <Operation
                     className={`${prefixCls}-operation`}
@@ -178,14 +180,14 @@ export default class Transfer extends React.Component {
                     render={this.props.render}
                     selectedKeys={this.state.targetSelectedKeys}
                     handleSelect={selectedKeys => this.handleSelect('right', selectedKeys)}
-                    showSearch
-                    showHeader
+                    showSearch={showSearch}
                     filterOption={filterOption}
                     itemsUnit={'items'}
                     itemUnit={'item'}
                     titleText={titles[1]}
                     rowHeight={this.props.rowHeight}
                     style={this.props.listStyle}
+                    footer={footer}
                 />
             </div>
         );
@@ -205,6 +207,8 @@ Transfer.defaultProps = {
         height: 300,
     },
     operations: ['', ''],
+    showSearch: false,
+    footer: noop,
 };
 
 Transfer.propTypes = {
@@ -214,13 +218,15 @@ Transfer.propTypes = {
     selectedKeys: PropTypes.array,
     onChange: PropTypes.func.isRequired,
     onSelectChange: PropTypes.func,
-    titles: PropTypes.array,
-    className: PropTypes.string,
-    filterOption: PropTypes.func,
-    rowHeight: PropTypes.number.isRequired,
     listStyle: PropTypes.shape({
         height: PropTypes.number.isRequired, // not support %
         width: PropTypes.any,
     }),
+    className: PropTypes.string,
+    titles: PropTypes.array,
     operations: PropTypes.array,
+    showSearch: PropTypes.bool,
+    filterOption: PropTypes.func,
+    rowHeight: PropTypes.number.isRequired,
+    footer: PropTypes.func,
 };
