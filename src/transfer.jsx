@@ -142,7 +142,8 @@ export default class Transfer extends React.Component {
 
     render() {
         const { sourceSelectedKeys, targetSelectedKeys } = this.state;
-        const { titles, className, filterOption, showSearch, footer } = this.props;
+        const { titles, className, filterOption, showSearch, footer, notFoundContent,
+                searchPlaceholder } = this.props;
         const leftActive = targetSelectedKeys.length > 0;
         const rightActive = sourceSelectedKeys.length > 0;
 
@@ -165,6 +166,8 @@ export default class Transfer extends React.Component {
                     rowHeight={this.props.rowHeight}
                     style={this.props.listStyle}
                     footer={footer}
+                    notFoundContent={notFoundContent}
+                    searchPlaceholder={searchPlaceholder}
                 />
                 <Operation
                     className={`${prefixCls}-operation`}
@@ -188,6 +191,8 @@ export default class Transfer extends React.Component {
                     rowHeight={this.props.rowHeight}
                     style={this.props.listStyle}
                     footer={footer}
+                    notFoundContent={notFoundContent}
+                    searchPlaceholder={searchPlaceholder}
                 />
             </div>
         );
@@ -209,6 +214,8 @@ Transfer.defaultProps = {
     operations: ['', ''],
     showSearch: false,
     footer: noop,
+    notFoundContent: 'Not Found',
+    searchPlaceholder: 'Search here',
 };
 
 Transfer.propTypes = {
@@ -227,6 +234,8 @@ Transfer.propTypes = {
     operations: PropTypes.array,
     showSearch: PropTypes.bool,
     filterOption: PropTypes.func,
+    searchPlaceholder: PropTypes.string,
+    notFoundContent: PropTypes.string,
     rowHeight: PropTypes.number.isRequired,
     footer: PropTypes.func,
 };

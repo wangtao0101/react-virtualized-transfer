@@ -189,7 +189,8 @@ export default class SelectList extends React.Component {
 
     render() {
         const { footer, showSearch, showHeader, selectedKeys,
-            itemUnit, itemsUnit, titleText, style } = this.props;
+                itemUnit, itemsUnit, titleText, style, notFoundContent,
+                searchPlaceholder } = this.props;
         const { dataSource } = this.state;
 
         const className = classNames({
@@ -241,6 +242,7 @@ export default class SelectList extends React.Component {
                 onChange={this.handleFilterWapper}
                 handleClear={this.handleClear}
                 prefixCls={`${prefixCls}-list-search`}
+                placeholder={searchPlaceholder}
             />
         ) : null;
 
@@ -248,15 +250,31 @@ export default class SelectList extends React.Component {
             <div className={className} style={style}>
                 {header}
                 {search}
-                <List
-                    ref={(list) => { this.list = list; }}
-                    height={bodyHeight}
-                    rowCount={dataSource.length}
-                    rowHeight={this.props.rowHeight}
-                    rowRenderer={this.rowRenderer}
-                    width={1}
-                    className={`${prefixCls}-list-virtualized`}
-                />
+                {
+                    dataSource.length > 0 &&
+                    <List
+                        ref={(list) => { this.list = list; }}
+                        height={bodyHeight}
+                        rowCount={dataSource.length}
+                        rowHeight={this.props.rowHeight}
+                        rowRenderer={this.rowRenderer}
+                        width={1}
+                        className={`${prefixCls}-list-virtualized`}
+                    />
+                }
+
+                {
+                    dataSource.length === 0 &&
+                    <div
+                        className={`${prefixCls}-list-body-not-found`}
+                        style={{
+                            height: bodyHeight,
+                            'line-height': bodyHeight,
+                        }}
+                    >
+                        {notFoundContent}
+                    </div>
+                }
                 {listFooter}
             </div>
         );
@@ -275,6 +293,8 @@ SelectList.defaultProps = {
         width: 200,
         height: 300,
     },
+    notFoundContent: 'Not Found',
+    searchPlaceholder: 'Search here',
 };
 
 SelectList.propTypes = {
@@ -294,4 +314,6 @@ SelectList.propTypes = {
         height: PropTypes.number.isRequired, // not support %
         width: PropTypes.any,
     }),
+    notFoundContent: PropTypes.string,
+    searchPlaceholder: PropTypes.string,
 };

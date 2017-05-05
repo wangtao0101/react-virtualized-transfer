@@ -5,9 +5,11 @@ import TestTransfer from './TestTransfer';
 import '../src/transfer.less';
 
 storiesOf('Transfer', module)
-    .add('SelectList', () => (
-        <TestSelectList />
-    ))
-    .add('transfer', () => (
+    .add('basic', () => (
         <TestTransfer />
+    ));
+
+storiesOf('MitiSelect', module)
+    .add('basic', () => (
+        <TestSelectList />
     ));

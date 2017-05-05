@@ -80,6 +80,16 @@
                 background-color: @primary-1;
             }
         }
+        &-body-not-found {
+            // padding-top: 0;
+            color: @disabled-color;
+            text-align: center;
+            // display: none;
+            // position: absolute;
+            // top: 50%;
+            width: 100%;
+            // margin-top: -10px;
+        }
         &-footer {
             border-top: @border-width-base @border-style-base @border-color-split;
             border-radius: 0 0 @border-radius-base @border-radius-base;
@@ -87,9 +97,7 @@
             bottom: 0;
             left: 0;
             width: 100%;
-        }
-
-        // fix the problem of ReactVirtualized List must hava width (number) props
+        } // fix the problem of ReactVirtualized List must hava width (number) props
         &-virtualized {
             width: 100% !important;
         }
@@ -114,4 +122,3 @@
         }
     }
 }
-

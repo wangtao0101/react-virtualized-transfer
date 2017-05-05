@@ -72,6 +72,9 @@ export default class TestTransferList extends React.Component {
                     height: 400,
                 }}
                 operations={['to right', 'to left']}
+                showSearch
+                notFoundContent={'not found'}
+                searchPlaceholder={'Search'}
             />
         );
     }
