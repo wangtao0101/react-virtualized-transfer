@@ -38,6 +38,7 @@ We should handle more then 10 thousands of data, but the transfer compoment in a
 
 
 ## Example
+```js
 export default class TestTransferList extends React.Component {
     constructor(props) {
         super(props);
