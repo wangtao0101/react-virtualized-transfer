@@ -6,10 +6,10 @@ To develop fast, some code and file maybe come from antd, thank to the great pro
 Example: https://wangtao0101.github.io/react-virtualized-transfer/
 
 ## Motivation
-We should handle more then 10 thousands of data, but the transfer compoment in antd is very slowly when the number come to 1000
+We should handle more then 10 thousands of data, but the transfer compoment in antd is very slowly when the number comes to 1000
 
-## Difference from antd
-1. react-virtualized-transfer need rowHeight prop (since react-virtualized-transfer use [react virtualized](https://github.com/bvaughn/react-virtualized))
+## Difference with antd
+1. react-virtualized-transfer needs rowHeight prop (since using [react virtualized](https://github.com/bvaughn/react-virtualized))
 2. react-virtualized-transfer is fast without using [Animate](https://github.com/react-component/animate)
 
 ## API (not support means antd support but react-virtualized-transfer not support)
@@ -35,3 +35,85 @@ We should handle more then 10 thousands of data, but the transfer compoment in a
 | footer | A function used for rendering the footer. | (props): ReactNode |  |
 | lazy(not support) | property of [react-lazy-load](https://github.com/loktar00/react-lazy-load) for lazy rendering items | object | `{ height: 32, offset: 32 }` |
 | onSearchChange(not support) | A callback function which is executed when search field are changed | (direction: 'left'\|'right', event: Event): void | - |
+
+
+## Example
+export default class TestTransferList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedKeys: [],
+            targetKeys: [],
+            dataSource: [],
+        };
+        this.getMock = this.getMock.bind(this);
+        this.handleSelectChange = this.handleSelectChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    componentWillMount() {
+        this.getMock();
+    }
+
+    getMock() {
+        const dataSource = [];
+        const targetKeys = [];
+        const length = 5000;
+        for (let i = 0; i < (length < 1 ? 10 : length); i += 1) {
+            const data = {
+                key: i.toString(),
+                title: `content${i + 1}`,
+                description: `description of content${i + 1}`,
+                disabled: i % 3 < 1,
+                chosen: Math.random() * 2 > 1,
+            };
+            if (data.chosen) {
+                targetKeys.push(data.key);
+            }
+            dataSource.push(data);
+        }
+        this.setState({
+            dataSource,
+            selectedKeys: [],
+            targetKeys,
+        });
+    }
+
+    filterOption(inputValue, option) {
+        return option.description.indexOf(inputValue) > -1;
+    }
+
+    handleChange(nextTargetKeys, _direction, _moveKeys) {
+        this.setState({ targetKeys: nextTargetKeys });
+    }
+
+    handleSelectChange(sourceSelectedKeys, targetSelectedKeys) {
+        this.setState({ selectedKeys: [...sourceSelectedKeys, ...targetSelectedKeys] });
+    }
+
+    render() {
+        return (
+            <Transfer
+                render={item => `${item.title}-${item.description}`}
+                dataSource={this.state.dataSource}
+                targetKeys={this.state.targetKeys}
+                selectedKeys={this.state.selectedKeys}
+                onSelectChange={this.handleSelectChange}
+                filterOption={this.filterOption}
+                onChange={this.handleChange}
+                titles={['source', 'target']}
+                className={'test'}
+                rowHeight={32}
+                listStyle={{
+                    width: '40%',
+                    height: 400,
+                }}
+                operations={['to right', 'to left']}
+                showSearch
+                notFoundContent={'not found'}
+                searchPlaceholder={'Search'}
+            />
+        );
+    }
+}
+```
