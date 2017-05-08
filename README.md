@@ -6,11 +6,12 @@ To develop fast, some code and file maybe come from antd, thank to the great pro
 Example: https://wangtao0101.github.io/react-virtualized-transfer/
 
 ## Motivation
-We should handle more then 10 thousands of data, but the transfer compoment in antd is very slowly when the number comes to 1000
+We should handle more then 10 thousands of data, but the transfer component in antd is very slowly when the number comes to 1000
 
 ## Difference with antd
-1. react-virtualized-transfer needs rowHeight prop (since using [react virtualized](https://github.com/bvaughn/react-virtualized))
-2. react-virtualized-transfer is fast without using [Animate](https://github.com/react-component/animate)
+1. needs rowHeight prop (since using [react virtualized](https://github.com/bvaughn/react-virtualized))
+2. fast without using [Animate](https://github.com/react-component/animate)
+3. no i18n, user should realize by yourself
 
 ## API (not support means antd support but react-virtualized-transfer not support)
 
