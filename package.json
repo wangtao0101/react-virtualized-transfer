@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/wangtao0101/react-virtualized-transfer#readme",
   "dependencies": {
-    "antd": "^2.9.3",
+    "antd": "^2.10.0",
     "classnames": "^2.2.5",
     "immutable": "^3.8.1",
     "invariant": "^2.2.2",

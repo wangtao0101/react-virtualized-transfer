@@ -6,8 +6,6 @@ import classNames from 'classnames';
 import { Checkbox } from 'antd';
 import _ from 'lodash';
 
-import 'antd/lib/form/style/index.less';
-
 import Item from './item';
 import Search from './search';
 import prefixCls from './constants';
