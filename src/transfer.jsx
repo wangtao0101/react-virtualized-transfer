@@ -58,6 +58,10 @@ export default class Transfer extends React.Component {
         const oldTargetSelectedKeys = this.state.targetSelectedKeys;
 
         props.dataSource.forEach((item) => {
+            if (props.rowKey) {
+                item.key = props.rowKey(item); // eslint-disable-line
+            }
+
             if (props.targetKeys.includes(item.key)) {
                 rightSrouce.push(item);
             } else {
@@ -215,6 +219,7 @@ Transfer.defaultProps = {
     footer: noop,
     notFoundContent: 'Not Found',
     searchPlaceholder: 'Search here',
+    rowKey: undefined,
 };
 
 Transfer.propTypes = {
@@ -237,4 +242,5 @@ Transfer.propTypes = {
     notFoundContent: PropTypes.string,
     rowHeight: PropTypes.number.isRequired,
     footer: PropTypes.func,
+    rowKey: PropTypes.func, // eslint-disable-line
 };
