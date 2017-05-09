@@ -25,6 +25,10 @@ import Transfer from 'react-virtualized-transfer';
 require('react-virtualized-transfer/lib/transfer.css')
 ```
 Use less version, then you can [modify less variable](https://ant.design/docs/react/customize-theme-cn)
+```
+import Transfer from 'react-virtualized-transfer';
+require('react-virtualized-transfer/lib/transfer.less')
+```
 
 ## API (not support means antd support but react-virtualized-transfer not support)
 
