@@ -13,6 +13,19 @@ We should handle more then 10 thousands of data, but the transfer component in a
 2. fast without using [Animate](https://github.com/react-component/animate)
 3. no i18n, user should realize by yourself
 
+## Getting started
+```
+npm install react-virtualized-transfer --save
+yarn add react-virtualized-transfer
+```
+
+Use css version
+```
+import Transfer from 'react-virtualized-transfer';
+require('react-virtualized-transfer/lib/transfer.css')
+```
+Use less version, then you can [modify less variable](https://ant.design/docs/react/customize-theme-cn)
+
 ## API (not support means antd support but react-virtualized-transfer not support)
 
 | Property      | Description                                     | Type       | Default |
@@ -38,7 +51,8 @@ We should handle more then 10 thousands of data, but the transfer component in a
 | onSearchChange(not support) | A callback function which is executed when search field are changed | (direction: 'left'\|'right', event: Event): void | - |
 
 
-## Example
+## Example 
+example from [antd transfer](https://ant.design/components/transfer/)
 ```js
 export default class TestTransferList extends React.Component {
     constructor(props) {
