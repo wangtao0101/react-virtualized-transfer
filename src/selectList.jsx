@@ -248,26 +248,22 @@ export default class SelectList extends React.Component {
             <div className={className} style={style}>
                 {header}
                 {search}
-                {
-                    dataSource.length > 0 &&
-                    <List
-                        ref={(list) => { this.list = list; }}
-                        height={bodyHeight}
-                        rowCount={dataSource.length}
-                        rowHeight={this.props.rowHeight}
-                        rowRenderer={this.rowRenderer}
-                        width={1}
-                        className={`${prefixCls}-list-virtualized`}
-                    />
-                }
-
+                <List
+                    ref={(list) => { this.list = list; }}
+                    height={dataSource.length === 0 ? 0 : bodyHeight}
+                    rowCount={dataSource.length}
+                    rowHeight={this.props.rowHeight}
+                    rowRenderer={this.rowRenderer}
+                    width={1}
+                    className={`${prefixCls}-list-virtualized`}
+                />
                 {
                     dataSource.length === 0 &&
                     <div
                         className={`${prefixCls}-list-body-not-found`}
                         style={{
-                            height: bodyHeight,
-                            lineHeight: bodyHeight,
+                            height: `${bodyHeight}px`,
+                            lineHeight: `${bodyHeight}px`,
                         }}
                     >
                         {notFoundContent}
