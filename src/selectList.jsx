@@ -267,7 +267,7 @@ export default class SelectList extends React.Component {
                         className={`${prefixCls}-list-body-not-found`}
                         style={{
                             height: bodyHeight,
-                            'line-height': bodyHeight,
+                            lineHeight: bodyHeight,
                         }}
                     >
                         {notFoundContent}
