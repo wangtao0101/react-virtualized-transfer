@@ -103,14 +103,14 @@ export default class Transfer extends React.Component {
         const leftKeys = direction === 'left' ? selectedKeys : this.state.sourceSelectedKeys;
         const rightKeys = direction === 'right' ? selectedKeys : this.state.targetSelectedKeys;
         const onSelectChange = this.props.onSelectChange;
-        if (!onSelectChange) {
+        onSelectChange(leftKeys, rightKeys);
+
+        if (!this.props.selectedKeys) {
             this.setState({
                 sourceSelectedKeys: leftKeys,
                 targetSelectedKeys: rightKeys,
             });
-            return;
         }
-        this.props.onSelectChange(leftKeys, rightKeys);
     }
 
     moveTo(direction) {
