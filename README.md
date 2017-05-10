@@ -6,7 +6,7 @@ To develop fast, some code and file maybe come from antd, thank to the great pro
 Example: https://wangtao0101.github.io/react-virtualized-transfer/
 
 ## Motivation
-We should handle more then 10 thousands of data, but the transfer component in antd is very slowly when the number comes to 1000
+We should handle more than 10 thousands of data, but the transfer component in antd is very slow when the number comes to 1000
 
 ## Difference with antd
 1. needs rowHeight prop (since using [react virtualized](https://github.com/bvaughn/react-virtualized))
@@ -25,6 +25,10 @@ import Transfer from 'react-virtualized-transfer';
 require('react-virtualized-transfer/lib/transfer.css')
 ```
 Use less version, then you can [modify less variable](https://ant.design/docs/react/customize-theme-cn)
+```
+import Transfer from 'react-virtualized-transfer';
+require('react-virtualized-transfer/lib/transfer.less')
+```
 
 ## API (not support means antd support but react-virtualized-transfer not support)
 
