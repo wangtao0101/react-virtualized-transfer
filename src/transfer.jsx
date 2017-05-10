@@ -52,6 +52,7 @@ export default class Transfer extends React.Component {
     initStateByProps(props, update) {
         const leftSource = [];
         const rightSrouce = [];
+        const tempRightSrouce = [];
         const sourceSelectedKeys = [];
         const targetSelectedKeys = [];
         const oldSourceSelectedKeys = this.state.sourceSelectedKeys;
@@ -63,7 +64,7 @@ export default class Transfer extends React.Component {
             }
 
             if (props.targetKeys.includes(item.key)) {
-                rightSrouce.push(item);
+                tempRightSrouce.push(item);
             } else {
                 leftSource.push(item);
             }
@@ -78,6 +79,17 @@ export default class Transfer extends React.Component {
                     props.targetKeys.includes(item.key)) {
                     targetSelectedKeys.push(item.key);
                 }
+            }
+        });
+
+        const itemMap = {};
+        tempRightSrouce.forEach((item) => {
+            itemMap[item.key] = item;
+        });
+
+        props.targetKeys.forEach((targetKey) => {
+            if (itemMap[targetKey]) {
+                rightSrouce.push(itemMap[targetKey]);
             }
         });
 
@@ -146,7 +158,7 @@ export default class Transfer extends React.Component {
     render() {
         const { sourceSelectedKeys, targetSelectedKeys } = this.state;
         const { titles, className, filterOption, showSearch, footer, notFoundContent,
-                searchPlaceholder } = this.props;
+            searchPlaceholder } = this.props;
         const leftActive = targetSelectedKeys.length > 0;
         const rightActive = sourceSelectedKeys.length > 0;
 
