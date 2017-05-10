@@ -12,3 +12,5 @@ src
 jsconfig.json
 yarn.lock
 coverage/
+stories
+storybook-static
