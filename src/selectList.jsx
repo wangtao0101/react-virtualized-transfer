@@ -63,6 +63,10 @@ export default class SelectList extends React.Component {
     }
 
     componentDidUpdate() {
+        /**
+         * Sometimes there will be called redundant, but call forceUpdateGrid there every time is
+         * the easyest way to ensure right update
+         */
         this.list.forceUpdateGrid();
     }
 
@@ -149,8 +153,6 @@ export default class SelectList extends React.Component {
         this.setState({
             filter: '',
             dataSource: this.props.dataSource,
-        }, () => {
-            this.list.scrollToRow(0);
         });
     }
 
