@@ -51,8 +51,7 @@ export default class Transfer extends React.Component {
 
     initStateByProps(props, update) {
         const leftSource = [];
-        const rightSrouce = [];
-        const tempRightSrouce = [];
+        const rightSrouce = new Array(props.targetKeys.length);
         const sourceSelectedKeys = [];
         const targetSelectedKeys = [];
         const oldSourceSelectedKeys = this.state.sourceSelectedKeys;
@@ -63,8 +62,11 @@ export default class Transfer extends React.Component {
                 item.key = props.rowKey(item); // eslint-disable-line
             }
 
-            if (props.targetKeys.includes(item.key)) {
-                tempRightSrouce.push(item);
+            // rightSource should be ordered by targetKeys
+            // leftSource should be ordered by dataSource
+            const indexOfKey = props.targetKeys.indexOf(item.key);
+            if (indexOfKey !== -1) {
+                rightSrouce[indexOfKey] = item;
             } else {
                 leftSource.push(item);
             }
@@ -79,17 +81,6 @@ export default class Transfer extends React.Component {
                     props.targetKeys.includes(item.key)) {
                     targetSelectedKeys.push(item.key);
                 }
-            }
-        });
-
-        const itemMap = {};
-        tempRightSrouce.forEach((item) => {
-            itemMap[item.key] = item;
-        });
-
-        props.targetKeys.forEach((targetKey) => {
-            if (itemMap[targetKey]) {
-                rightSrouce.push(itemMap[targetKey]);
             }
         });
 
