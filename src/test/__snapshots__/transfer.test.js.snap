@@ -1,0 +1,202 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Transfer should render correctly and should show sorted targetkeys 1`] = `
+<div
+  class="transfer"
+>
+  <div
+    class="transfer-list"
+    style="width:200px;height:300px;"
+  >
+    <div
+      class="transfer-list-header"
+    >
+      <label
+        class="ant-checkbox-wrapper"
+      >
+        <span
+          class="ant-checkbox ant-checkbox-checked"
+        >
+          <input
+            checked=""
+            class="ant-checkbox-input"
+            type="checkbox"
+          />
+          <span
+            class="ant-checkbox-inner"
+          />
+        </span>
+      </label>
+      <span
+        class="transfer-list-header-selected"
+      >
+        <span>
+          1/1 item
+        </span>
+        <span
+          class="transfer-list-header-title"
+        />
+      </span>
+    </div>
+    <div
+      aria-label="grid"
+      class="ReactVirtualized__Grid ReactVirtualized__List transfer-list-virtualized"
+      role="grid"
+      style="box-sizing:border-box;direction:ltr;height:265px;position:relative;width:1px;-webkit-overflow-scrolling:touch;will-change:transform;overflow-x:hidden;overflow-y:hidden;"
+      tabindex="0"
+    >
+      <div
+        class="ReactVirtualized__Grid__innerScrollContainer"
+        style="width:auto;height:32px;max-width:1px;max-height:32px;overflow:hidden;pointer-events:;position:relative;"
+      >
+        <li
+          class="transfer-list-content-item"
+          style="height:32px;left:0;position:absolute;top:0;width:100%;"
+          title="a"
+        >
+          <label
+            class="ant-checkbox-wrapper"
+          >
+            <span
+              class="ant-checkbox ant-checkbox-checked"
+            >
+              <input
+                checked=""
+                class="ant-checkbox-input"
+                type="checkbox"
+              />
+              <span
+                class="ant-checkbox-inner"
+              />
+            </span>
+          </label>
+          <span>
+            a
+          </span>
+        </li>
+      </div>
+    </div>
+  </div>
+  <div
+    class="transfer-operation"
+  >
+    <button
+      class="ant-btn ant-btn-primary ant-btn-sm"
+      disabled=""
+      type="button"
+    >
+      <span>
+        <i
+          class="anticon anticon-left"
+        />
+      </span>
+    </button>
+    <button
+      class="ant-btn ant-btn-primary ant-btn-sm"
+      type="button"
+    >
+      <span>
+        <i
+          class="anticon anticon-right"
+        />
+      </span>
+    </button>
+  </div>
+  <div
+    class="transfer-list"
+    style="width:200px;height:300px;"
+  >
+    <div
+      class="transfer-list-header"
+    >
+      <label
+        class="ant-checkbox-wrapper"
+      >
+        <span
+          class="ant-checkbox"
+        >
+          <input
+            class="ant-checkbox-input"
+            type="checkbox"
+          />
+          <span
+            class="ant-checkbox-inner"
+          />
+        </span>
+      </label>
+      <span
+        class="transfer-list-header-selected"
+      >
+        <span>
+          2 items
+        </span>
+        <span
+          class="transfer-list-header-title"
+        />
+      </span>
+    </div>
+    <div
+      aria-label="grid"
+      class="ReactVirtualized__Grid ReactVirtualized__List transfer-list-virtualized"
+      role="grid"
+      style="box-sizing:border-box;direction:ltr;height:265px;position:relative;width:1px;-webkit-overflow-scrolling:touch;will-change:transform;overflow-x:hidden;overflow-y:hidden;"
+      tabindex="0"
+    >
+      <div
+        class="ReactVirtualized__Grid__innerScrollContainer"
+        style="width:auto;height:64px;max-width:1px;max-height:64px;overflow:hidden;pointer-events:;position:relative;"
+      >
+        <li
+          class="transfer-list-content-item transfer-list-content-item-disabled"
+          style="height:32px;left:0;position:absolute;top:0;width:100%;"
+          title="c"
+        >
+          <label
+            class="ant-checkbox-wrapper"
+          >
+            <span
+              class="ant-checkbox ant-checkbox-disabled"
+            >
+              <input
+                class="ant-checkbox-input"
+                disabled=""
+                type="checkbox"
+              />
+              <span
+                class="ant-checkbox-inner"
+              />
+            </span>
+          </label>
+          <span>
+            c
+          </span>
+        </li>
+        <li
+          class="transfer-list-content-item"
+          style="height:32px;left:0;position:absolute;top:32px;width:100%;"
+          title="b"
+        >
+          <label
+            class="ant-checkbox-wrapper"
+          >
+            <span
+              class="ant-checkbox"
+            >
+              <input
+                class="ant-checkbox-input"
+                type="checkbox"
+              />
+              <span
+                class="ant-checkbox-inner"
+              />
+            </span>
+          </label>
+          <span>
+            b
+          </span>
+        </li>
+      </div>
+    </div>
+  </div>
+</div>
+`;
