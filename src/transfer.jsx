@@ -106,7 +106,10 @@ export default class Transfer extends React.Component {
         const leftKeys = direction === 'left' ? selectedKeys : this.state.sourceSelectedKeys;
         const rightKeys = direction === 'right' ? selectedKeys : this.state.targetSelectedKeys;
         const onSelectChange = this.props.onSelectChange;
-        onSelectChange(leftKeys, rightKeys);
+
+        if (onSelectChange) {
+            onSelectChange(leftKeys, rightKeys);
+        }
 
         if (!this.props.selectedKeys) {
             this.setState({
@@ -223,6 +226,7 @@ Transfer.defaultProps = {
     notFoundContent: 'Not Found',
     searchPlaceholder: 'Search here',
     rowKey: undefined,
+    onChange: undefined,
 };
 
 Transfer.propTypes = {
@@ -230,7 +234,7 @@ Transfer.propTypes = {
     render: PropTypes.func.isRequired,
     targetKeys: PropTypes.array.isRequired,
     selectedKeys: PropTypes.array,
-    onChange: PropTypes.func.isRequired,
+    onChange: PropTypes.func,
     onSelectChange: PropTypes.func,
     listStyle: PropTypes.shape({
         height: PropTypes.number.isRequired, // not support %
