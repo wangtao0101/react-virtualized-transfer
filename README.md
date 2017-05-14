@@ -1,6 +1,8 @@
 # react-virtualized-transfer
 
 [![NPM version](https://img.shields.io/npm/v/react-virtualized-transfer.svg?style=flat)](https://www.npmjs.com/package/react-virtualized-transfer)
+[![Build Status](https://img.shields.io/travis/wangtao0101/react-virtualized-transfer.svg?style=flat)](https://travis-ci.org/wangtao0101/react-virtualized-transfer)
+
 
 Transfer component with virtualization based on [antd](https://github.com/ant-design/ant-design), and 10 times performance than antd transfer!
 
