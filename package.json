@@ -1,6 +1,6 @@
 {
   "name": "react-virtualized-transfer",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "react-virtualized-transfer",
   "main": "lib/index.js",
   "scripts": {
@@ -84,7 +84,7 @@
     "webpack": "^1.12.0"
   },
   "peerDependencies": {
-    "antd": "^2.0.0",
+    "antd": "^2.x",
     "react": "^15.3.0 || ^16.0.0-alpha",
     "react-dom": "^15.3.0 || ^16.0.0-alpha"
   },
