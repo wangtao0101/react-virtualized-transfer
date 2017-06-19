@@ -162,6 +162,10 @@ export default class SelectList extends React.Component {
         const checked = this.props.selectedKeys.indexOf(item.key) >= 0;
         const itemPrefixCls = `${prefixCls}-list`;
 
+        if (this.props.rowKey) {
+            item.key = this.props.rowKey(item);
+        }
+
         return (
             <Item
                 key={item.key}
@@ -291,6 +295,7 @@ SelectList.defaultProps = {
     },
     notFoundContent: 'Not Found',
     searchPlaceholder: 'Search here',
+    rowKey: undefined,
 };
 
 SelectList.propTypes = {
@@ -312,4 +317,5 @@ SelectList.propTypes = {
     }),
     notFoundContent: PropTypes.string,
     searchPlaceholder: PropTypes.string,
+    rowKey: PropTypes.func,
 };
