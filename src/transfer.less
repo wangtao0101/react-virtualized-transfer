@@ -5,10 +5,11 @@
 .@{prefix} {
     position: relative;
     line-height: @line-height-base;
+    display: flex;
+    align-items: center;
     &-list {
         font-size: @font-size-base;
         border: @border-width-base @border-style-base @border-color-base;
-        display: inline-block;
         border-radius: @border-radius-base;
         vertical-align: middle;
         position: relative;
@@ -107,10 +108,9 @@
         }
     }
     &-operation {
-        display: inline-block;
         overflow: hidden;
         margin: 0 8px;
-        vertical-align: middle;
+        flex: none;
         .@{ant-prefix}-btn {
             display: block;
             &:first-child {
