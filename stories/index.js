@@ -2,7 +2,8 @@ import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 import TestSelectList from './TestSelectList';
 import TestTransfer from './TestTransfer';
-import '../src/transfer.less';
+import '../src/less';
+
 
 storiesOf('Transfer', module)
     .add('basic', () => (
