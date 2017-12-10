@@ -6,3 +6,5 @@ npm-debug.*
 lib/
 coverage/
 storybook-static
+es/
+css/

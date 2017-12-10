@@ -11,7 +11,8 @@ To develop fast, some code and file maybe come from antd, thank to the great pro
 Example: https://wangtao0101.github.io/react-virtualized-transfer/
 
 ## Break Change
-use css.js and less.js to help import css or less ！！
+use css.js and less.js to help import css or less !!
+support es version !!
 
 ## Motivation
 We should handle more than 10 thousands of data, but the transfer component in antd is very slow when the number comes to 1000
@@ -30,12 +31,18 @@ yarn add react-virtualized-transfer
 Use css version
 ```
 import Transfer from 'react-virtualized-transfer';
+
 require('react-virtualized-transfer/lib/css')
+// or
+require('react-virtualized-transfer/es/css')
 ```
 Use less version, then you can [modify less variable](https://ant.design/docs/react/customize-theme-cn)
 ```
 import Transfer from 'react-virtualized-transfer';
+
 require('react-virtualized-transfer/lib/less')
+// or
+require('react-virtualized-transfer/es/less')
 ```
 
 ## API (not support means antd support but react-virtualized-transfer not support)
