@@ -13,6 +13,18 @@
         "transform-runtime"
 	],
     "env": {
+        "test": {
+            "sourceMaps" : "inline",
+            "presets": [
+                ["env", {
+                    "targets": {
+                        "browsers": ["last 2 versions", "ie >= 9"]
+                    }
+                }],
+                "react",
+                "jest",
+            ],
+        },
         "development": {
             "sourceMaps" : "inline",
             "presets": [

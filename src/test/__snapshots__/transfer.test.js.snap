@@ -6,7 +6,7 @@ exports[`Transfer should render correctly and should show sorted targetkeys 1`] 
 >
   <div
     class="transfer-list"
-    style="width:200px;height:300px;"
+    style="width:200px;height:300px"
   >
     <div
       class="transfer-list-header"
@@ -42,16 +42,16 @@ exports[`Transfer should render correctly and should show sorted targetkeys 1`] 
       aria-label="grid"
       class="ReactVirtualized__Grid ReactVirtualized__List transfer-list-virtualized"
       role="grid"
-      style="box-sizing:border-box;direction:ltr;height:265px;position:relative;width:1px;-webkit-overflow-scrolling:touch;will-change:transform;overflow-x:hidden;overflow-y:hidden;"
+      style="box-sizing:border-box;direction:ltr;height:265px;position:relative;width:1px;-webkit-overflow-scrolling:touch;will-change:transform;overflow-x:hidden;overflow-y:hidden"
       tabindex="0"
     >
       <div
         class="ReactVirtualized__Grid__innerScrollContainer"
-        style="width:auto;height:32px;max-width:1px;max-height:32px;overflow:hidden;pointer-events:;position:relative;"
+        style="width:auto;height:32px;max-width:1px;max-height:32px;overflow:hidden;pointer-events:;position:relative"
       >
         <li
           class="transfer-list-content-item"
-          style="height:32px;left:0;position:absolute;top:0;width:100%;"
+          style="height:32px;left:0;position:absolute;top:0;width:100%"
           title="a"
         >
           <label
@@ -104,7 +104,7 @@ exports[`Transfer should render correctly and should show sorted targetkeys 1`] 
   </div>
   <div
     class="transfer-list"
-    style="width:200px;height:300px;"
+    style="width:200px;height:300px"
   >
     <div
       class="transfer-list-header"
@@ -139,16 +139,16 @@ exports[`Transfer should render correctly and should show sorted targetkeys 1`] 
       aria-label="grid"
       class="ReactVirtualized__Grid ReactVirtualized__List transfer-list-virtualized"
       role="grid"
-      style="box-sizing:border-box;direction:ltr;height:265px;position:relative;width:1px;-webkit-overflow-scrolling:touch;will-change:transform;overflow-x:hidden;overflow-y:hidden;"
+      style="box-sizing:border-box;direction:ltr;height:265px;position:relative;width:1px;-webkit-overflow-scrolling:touch;will-change:transform;overflow-x:hidden;overflow-y:hidden"
       tabindex="0"
     >
       <div
         class="ReactVirtualized__Grid__innerScrollContainer"
-        style="width:auto;height:64px;max-width:1px;max-height:64px;overflow:hidden;pointer-events:;position:relative;"
+        style="width:auto;height:64px;max-width:1px;max-height:64px;overflow:hidden;pointer-events:;position:relative"
       >
         <li
           class="transfer-list-content-item transfer-list-content-item-disabled"
-          style="height:32px;left:0;position:absolute;top:0;width:100%;"
+          style="height:32px;left:0;position:absolute;top:0;width:100%"
           title="c"
         >
           <label
@@ -173,7 +173,7 @@ exports[`Transfer should render correctly and should show sorted targetkeys 1`] 
         </li>
         <li
           class="transfer-list-content-item"
-          style="height:32px;left:0;position:absolute;top:32px;width:100%;"
+          style="height:32px;left:0;position:absolute;top:32px;width:100%"
           title="b"
         >
           <label

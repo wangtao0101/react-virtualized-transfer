@@ -39,16 +39,17 @@
     "babel-preset-env": "1.6.1",
     "babel-preset-es2015-rollup": "^3.0.0",
     "classnames": "^2.2.5",
+    "enzyme-adapter-react-16": "^1.1.0",
     "invariant": "^2.2.2",
     "lodash": "^4.17.4",
     "react-virtualized": "^9.7.3",
     "warning": "^3.0.0"
   },
   "devDependencies": {
-    "@kadira/storybook": "^2.21.0",
+    "@storybook/cli": "^3.2.17",
     "@types/jest": "^19.2.2",
     "@types/react": "^15.0.23",
-    "antd": "^2.10.0",
+    "antd": "3.0.0",
     "autoprefixer": "6.7.2",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.0",
@@ -61,15 +62,15 @@
     "copyfiles": "^1.2.0",
     "cross-env": "^5.1.1",
     "css-loader": "^0.26.4",
-    "enzyme": "^2.8.2",
+    "enzyme": "3.1.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
     "gh-pages": "^0.12.0",
-    "jest": "^20.0.0",
-    "jest-enzyme": "^3.1.0",
+    "jest": "21.2.1",
+    "jest-enzyme": "4.0.1",
     "less": "^2.7.1",
     "less-loader": "^3.0.0",
     "less-plugin-npm-import": "^2.1.0",
@@ -77,13 +78,13 @@
     "postcss": "^5.2.17",
     "postcss-cli": "^3.2.0",
     "postcss-loader": "^1.3.3",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
-    "react-test-renderer": "^15.5.4",
+    "react": "16.2.0",
+    "react-dom": "16.2.0",
     "redux": "^3.6.0",
     "redux-saga": "^0.14.5",
     "rimraf": "^2.6.2",
-    "webpack": "^1.12.0"
+    "webpack": "^1.12.0",
+    "@storybook/react": "^3.2.17"
   },
   "peerDependencies": {
     "antd": "^2.x || ^3.x",
@@ -94,6 +95,6 @@
     "moduleNameMapper": {
       "\\.(css|less)$": "<rootDir>/scripts/styleMock.js"
     },
-    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js"
+    "setupTestFrameworkScriptFile": "<rootDir>/scripts/setupTests.js"
   }
 }
