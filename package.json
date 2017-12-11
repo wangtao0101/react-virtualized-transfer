@@ -10,7 +10,7 @@
     "coverage": "jest --coverage ",
     "prepublish": "npm run lint && npm run build",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "build-storybook": "build-storybook -c .storybook -o storybook-static",
     "build:css": "node ./scripts/buildless.js",
     "clean": "rimraf lib && rimraf es",
     "less": "node node_modules/.bin/lessc --npm-import='prefix=~' src/transfer.less > css/transfer.css",

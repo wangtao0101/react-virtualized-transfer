@@ -1,0 +1,23 @@
+{
+    "plugins": [
+        ["lodash"],
+        ["import",
+			[
+			  	{
+			    	"libraryName": "antd",
+			    	"libraryDirectory": "lib",
+			    	"style": false
+			  	}
+			]
+		],
+        "transform-runtime"
+	],
+    "presets": [
+        ["env", {
+            "targets": {
+                "browsers": ["last 2 versions", "ie >= 9"]
+            }
+        }],
+        "react"
+    ]
+}
