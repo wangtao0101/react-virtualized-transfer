@@ -1,6 +1,6 @@
 {
   "name": "react-virtualized-transfer",
-  "version": "1.1.0",
+  "version": "1.4.0",
   "description": "react-virtualized-transfer",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -36,10 +36,7 @@
   "homepage": "https://github.com/wangtao0101/react-virtualized-transfer#readme",
   "dependencies": {
     "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "1.6.1",
-    "babel-preset-es2015-rollup": "^3.0.0",
     "classnames": "^2.2.5",
-    "enzyme-adapter-react-16": "^1.1.0",
     "invariant": "^2.2.2",
     "lodash": "^4.17.4",
     "react-virtualized": "^9.7.3",
@@ -47,6 +44,7 @@
   },
   "devDependencies": {
     "@storybook/cli": "^3.2.17",
+    "@storybook/react": "^3.2.17",
     "@types/jest": "^19.2.2",
     "@types/react": "^15.0.23",
     "antd": "3.0.0",
@@ -58,11 +56,13 @@
     "babel-loader": "^6.4.1",
     "babel-plugin-import": "^1.1.1",
     "babel-plugin-lodash": "^3.2.11",
+    "babel-preset-env": "1.6.1",
     "babel-preset-react": "^6.24.1",
     "copyfiles": "^1.2.0",
     "cross-env": "^5.1.1",
     "css-loader": "^0.26.4",
     "enzyme": "3.1.0",
+    "enzyme-adapter-react-16": "1.1.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
@@ -83,8 +83,7 @@
     "redux": "^3.6.0",
     "redux-saga": "^0.14.5",
     "rimraf": "^2.6.2",
-    "webpack": "^1.12.0",
-    "@storybook/react": "^3.2.17"
+    "webpack": "^1.12.0"
   },
   "peerDependencies": {
     "antd": "^2.x || ^3.x",
